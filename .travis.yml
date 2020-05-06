@@ -1,0 +1,13 @@
+dist: bionic
+
+services:
+  - docker
+
+before_script:
+  - docker version
+
+script:
+  - docker build --file Dockerfile .
+
+after_success:
+  - docker images
