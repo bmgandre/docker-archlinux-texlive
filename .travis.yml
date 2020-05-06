@@ -1,13 +1,34 @@
 dist: bionic
 
 services:
-  - docker
+- docker
+
+env:
+  global:
+    - BUNDLE_NAME=docker-archlinux-texlive-${TRAVIS_TAG:-$TRAVIS_BUILD_NUMBER}.tar.gz
+    - IMAGE_NAME="bmgandre/docker-archlinux-texlive:${TRAVIS_TAG:-$TRAVIS_BUILD_NUMBER}"
 
 before_script:
-  - docker version
+- docker version
 
 script:
-  - docker build --file Dockerfile .
+- docker build --tag "$IMAGE_NAME" --file Dockerfile .
 
 after_success:
-  - docker images
+- docker images
+
+before_deploy:
+- tar -cvzf ../${BUNDLE_NAME} *
+- echo "deploying $BUNDLE_NAME to GitHub releases"
+
+deploy:
+  - provider: releases
+    token:
+      secure: tyckBk0YLtJqcIqMdwc1Z/emFYbrWdSpV6Q/t5W7UBEEgfD2oi/Po/W/kPh/ISdVFpPzPrFHnaN++yaaBpyUA/HEWwX+UbcSSbZVt2MkV7bBlqbF3GkE5Wx4d3iuK6QMM8Bv+Iw0BRknNtYFAZfywtcayfCFUj2ADLHw6V/RyZPiJOQBU5dZ6JpdR6f3NWeTebVQQeOOuQ8spbTvL4NgIaQG1qs1sahf67oJKE560xP699iRoLFjxW/dejX/U4mC+JuBNkkQvpyBXuIo/ojR0WmiU0dsq8AI0qWs6u00TbcTlRGM72w2+Rddn3EDVMFVkNVKJOZejE1qolSseLVjpcf+VdzNwCt3H/a1gtyaanzYC3PTwIbvcHpm1QYdY252mkdqRUoPhXa3LyGvGE+uJGuWqdes1YhVfi5QzcwA12cr5bUptuH879VmKARmjgbusp/D5hLSdi+8LOuOveKp80xt9udLdu5G7ELNh9O2g6O6F2wd190PJF9wzsvBOwu7um3OyKNVc4TFYXy2O3kHxLoCVgwMBeQiEzcJk5ATE9Q7uw11FFnX5ZBymMHxWmxRcN8SWDHx+TmJ56bUB3SiUof/Tj8tqVr/RTGbU6uOQ+OekSEAUXqH/ljkJQW1ryVey5FB1DTwt3LyISu7nTPfghTwKNu1DNJZ24rB8z3YFi0=
+    file: "${BUNDLE_NAME}"
+    on:
+      tags: true
+  - provider: script
+    script: bash dockerhub-deploy "$TRAVIS_TAG" "$DOCKER_USER" "$DOCKER_PASSWORD" "$IMAGE_NAME"
+    on:
+      tags: true
