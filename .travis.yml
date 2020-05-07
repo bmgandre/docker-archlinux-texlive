@@ -18,7 +18,7 @@ after_success:
 - docker images
 
 before_deploy:
-- tar -cvzf ../${BUNDLE_NAME} *
+- tar -cvzf ${BUNDLE_NAME} *
 - echo "deploying $BUNDLE_NAME to GitHub releases"
 
 deploy:
