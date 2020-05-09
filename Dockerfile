@@ -8,5 +8,6 @@ RUN pacman -S --noconfirm \
 	base-devel \
         git \
         texlive-most \
-        po4a
+        po4a \
+	pdftk
 RUN pacman -Scc --noconfirm
