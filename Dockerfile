@@ -1,4 +1,4 @@
-FROM archlinux:20200505
+FROM archlinux:20200705
 
 LABEL maintainer="André Gomes<bmg.andre@gmail.com>"
 LABEL version="0.2.0"
