@@ -1,7 +1,7 @@
 FROM archlinux:base-20220109.0.43549
 
 LABEL maintainer="André Gomes<bmg.andre@gmail.com>"
-LABEL version="0.2.6"
+LABEL version="0.2.7"
 
 RUN pacman -Suyy --noconfirm
 RUN pacman -S --noconfirm \
