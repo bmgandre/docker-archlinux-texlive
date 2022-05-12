@@ -22,4 +22,4 @@ jobs:
       - name: Docker Build
         run: |
           docker build --tag bmgandre/docker-archlinux-texlive:${{ github.ref_name }} --file Dockerfile .
-          docker push bmgandre/docker-archlinux-texlive
+          docker push bmgandre/docker-archlinux-texlive:${{ github.ref_name }}
