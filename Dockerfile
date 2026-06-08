@@ -1,14 +1,17 @@
 FROM archlinux:base-20260531.0.538839
 
 LABEL maintainer="André Gomes<bmg.andre@gmail.com>"
-LABEL version="0.2.8"
+LABEL version="0.2.9"
 
 RUN pacman -Suyy --noconfirm
 RUN pacman -S --noconfirm \
     base-devel \
     git \
-    texlive-core \
+    texlive-basic \
     texlive-latex \
-    texlive-fontsextra \
+    texlive-fontsrecommended \
+    texlive-latexrecommended \
+    texlive-plaingeneric \
+    texlive-langportuguese \
     po4a \
     pdftk
