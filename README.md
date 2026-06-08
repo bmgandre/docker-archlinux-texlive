@@ -1,6 +1,6 @@
 # docker-archlinux-texlive
 > TexLive Docker Image based on Archlinux
 
-[![Build Status](https://travis-ci.org/bmgandre/docker-archlinux-texlive.svg?branch=master)](https://travis-ci.org/bmgandre/docker-archlinux-texlive)
+[![Build and Publish](https://github.com/bmgandre/docker-archlinux-texlive/actions/workflows/docker-image.yml/badge.svg)](https://github.com/bmgandre/docker-archlinux-texlive/actions/workflows/docker-image.yml)
 
 A Docker image containing latex and translation tools.
